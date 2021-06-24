@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
+    "build": "npm run lint && npm run clean && tsc",
     "webdriver:update": "webdriver-manager update --gecko false",
     "lint": "eslint protractor/**/*.ts test/**/*.ts",
     "test": "npm run test:headless",
