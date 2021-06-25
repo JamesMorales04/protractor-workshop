@@ -1,4 +1,4 @@
-import { Config } from 'protractor';
+import { Config, browser } from 'protractor';
 import { reporter } from './helpers/reporter';
 
 export const config: Config = {
@@ -10,6 +10,7 @@ export const config: Config = {
     defaultTimeoutInterval: 120000,
   },
   onPrepare: () => {
+    browser.manage().timeouts().implicitlyWait(3000);
     reporter();
   },
 };
