@@ -12,7 +12,8 @@ export const config: Config = {
   capabilities: {
     browserName: 'chrome',
     chromeOptions: {
-      args: ['--headless', '--disable-gpu'],
+      args: ['--headless', '--disable-gpu', '--disable-popup-blocking', '--no-default-browser-check', '--window-size=800,600'],
+      prefs: { credentials_enable_service: false },
     },
   },
   onPrepare: () => {
