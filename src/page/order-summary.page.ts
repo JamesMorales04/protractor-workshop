@@ -7,8 +7,7 @@ export class OrderSummaryPage {
     this.processComplete = $('#center_column > div > p > strong');
   }
 
-  public async goToProcessComplete(): Promise<void> {
-    await expect(this.processComplete.getText())
-      .toBe('Your order on My Store is complete.');
+  public async goToProcessComplete(): Promise<string> {
+    return this.processComplete.getText();
   }
 }

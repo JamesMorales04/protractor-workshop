@@ -33,7 +33,7 @@ describe('Buy a t-shirt', () => {
     await (browser.sleep(6000));
     await summaryStepPage.goToSignInMenu();
     await (browser.sleep(6000));
-    await signInStepPage.goToAddressMenu();
+    await signInStepPage.goToAddressMenu('aperdomobo@gmail.com', 'WorkshopProtractor');
     await (browser.sleep(6000));
     await addressStepPage.goToShippingStepMenu();
     await (browser.sleep(6000));
@@ -43,6 +43,6 @@ describe('Buy a t-shirt', () => {
     await (browser.sleep(6000));
     await bankPaymentPage.goToOrderSummaryMenu();
     await (browser.sleep(6000));
-    await orderSummaryPage.goToProcessComplete();
+    await expect(orderSummaryPage.goToProcessComplete()).toBe('Your order on My Store is complete.');
   });
 });

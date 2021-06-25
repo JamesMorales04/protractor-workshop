@@ -13,9 +13,9 @@ export class SignInStepPage {
     this.addressMenu = $('#SubmitLogin > span');
   }
 
-  public async goToAddressMenu(): Promise<void> {
-    await this.email.sendKeys('aperdomobo@gmail.com');
-    await this.password.sendKeys('WorkshopProtractor');
+  public async goToAddressMenu(email, password): Promise<void> {
+    await this.email.sendKeys(email);
+    await this.password.sendKeys(password);
     await this.addressMenu.click();
   }
 }
