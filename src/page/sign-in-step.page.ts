@@ -10,7 +10,7 @@ export class SignInStepPage {
   constructor() {
     this.email = $('#email');
     this.password = $('#passwd');
-    this.addressMenu = $('#SubmitLogin > span');
+    this.addressMenu = $('#SubmitLogin');
   }
 
   public async goToAddressMenu(email, password): Promise<void> {

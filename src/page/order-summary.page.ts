@@ -4,7 +4,7 @@ export class OrderSummaryPage {
   private processComplete: ElementFinder;
 
   constructor() {
-    this.processComplete = $('#center_column > div > p > strong');
+    this.processComplete = $('p.cheque-indent');
   }
 
   public async goToProcessComplete(): Promise<string> {
