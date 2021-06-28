@@ -13,7 +13,7 @@ export class SignInStepPage {
     this.addressMenu = $('#SubmitLogin');
   }
 
-  public async goToAddressMenu(email, password): Promise<void> {
+  public async login(email: string, password: string): Promise<void> {
     await this.email.sendKeys(email);
     await this.password.sendKeys(password);
     await this.addressMenu.click();
