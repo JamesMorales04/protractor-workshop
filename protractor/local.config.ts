@@ -10,7 +10,7 @@ export const config: Config = {
     defaultTimeoutInterval: 120000,
   },
   onPrepare: () => {
-    browser.manage().timeouts().implicitlyWait(3000);
+    browser.manage().timeouts().implicitlyWait(0);
     reporter();
   },
 };
