@@ -18,8 +18,8 @@ describe('Go to a shopping page', () => {
 
     beforeAll(async () => {
       await menuContentPage.goToTShirtMenu();
-      await productListPage.goToAddToCartMenu();
-      await (browser.sleep(6000));
+      await productListPage.selectProduct('Faded Short Sleeve T-shirts');
+      await productListPage.addToCart();
       await productAddedModalPage.goToSummaryMenu();
       await summaryStepPage.goToSignInMenu();
     });
