@@ -38,9 +38,11 @@ describe('Go to a shopping page', () => {
           const paymentStepPage: PaymentStepPage = new PaymentStepPage();
           const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
           const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
-          it('then should be bought a t-shirt', async () => {
+          beforeAll(async () => {
             await paymentStepPage.goToBankPaymentMenu();
             await bankPaymentPage.goToOrderSummaryMenu();
+          });
+          it('then should be bought a t-shirt', async () => {
             await expect(orderSummaryPage.goToProcessComplete()).toBe('Your order on My Store is complete.');
           });
         });
