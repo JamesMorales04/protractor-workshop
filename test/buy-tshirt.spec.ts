@@ -24,7 +24,7 @@ describe('Buy a t-shirt', () => {
     await (browser.sleep(6000));
     await productAddedModalPage.goToSummaryMenu();
     await summaryStepPage.goToSignInMenu();
-    await signInStepPage.goToAddressMenu('aperdomobo@gmail.com', 'WorkshopProtractor');
+    await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
     await addressStepPage.goToShippingStepMenu();
     await shippingStepPage.goToPaymentMenu();
     await paymentStepPage.goToBankPaymentMenu();
