@@ -1,5 +1,5 @@
 import {
-  $, element, by, ElementFinder,
+  $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
 interface PersonalData {
@@ -66,7 +66,17 @@ export class PersonalInformationPage {
     });
   }
 
+  public async switchToMainPage(): Promise<void> {
+    await browser.switchTo().defaultContent();
+  }
+
+  public async acceptAlert(): Promise<void> {
+    await browser.wait(ExpectedConditions.alertIsPresent());
+    await browser.switchTo().alert().accept();
+  }
+
   public async pressConfirmButton(): Promise<void> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.confirmButton), 3000);
     this.confirmButton.click();
   }
 }

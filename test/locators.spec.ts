@@ -26,9 +26,14 @@ describe('Given a SDET learning protractor', () => {
             'WebElement Commands'],
         });
       });
-      it('then should have the title Practice Automation Form', async () => {
-        await personalInformationPage.pressConfirmButton();
-        expect(await browser.driver.getTitle()).toEqual('Practice Automation Form');
+      describe('Accept the alert', () => {
+        beforeEach(async () => {
+          await personalInformationPage.pressConfirmButton();
+          await personalInformationPage.acceptAlert();
+        });
+        it('then should have the title Practice Automation Form', async () => {
+          expect(await browser.driver.getTitle()).toEqual('Selenium - Automation Practice Form - Tutorialspoint');
+        });
       });
     });
   });
