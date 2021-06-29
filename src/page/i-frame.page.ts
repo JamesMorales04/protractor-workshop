@@ -1,24 +1,30 @@
 import {
-  $, browser, ElementFinder, promise,
+  $, browser, ElementFinder, promise, ExpectedConditions,
 } from 'protractor';
 
 export class IFramePage {
   private iframe1: ElementFinder;
 
+  private documentTitleLabel: ElementFinder;
+
   constructor() {
     this.iframe1 = $('#frame1');
+    this.documentTitleLabel = $('.main-header');
   }
 
   public async switchToFrame(): Promise<void> {
+    this.documentTitleLabel = $('#sampleHeading');
     await browser.switchTo().frame(this.iframe1.getWebElement());
   }
 
   public async switchToMainPage(): Promise<void> {
+    this.documentTitleLabel = $('.main-header');
     await browser.switchTo().defaultContent();
   }
 
   public async getTittlePage(): Promise<string> {
-    return $('#sampleHeading').getText();
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.documentTitleLabel), 3000);
+    return this.documentTitleLabel.getText();
   }
 
   public async getFrameHeight(): Promise<number> {
