@@ -2,6 +2,8 @@ import {
   $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
+const { resolve } = require('path');
+
 interface PersonalData {
   firstName: string;
   lastName: string;
@@ -27,6 +29,7 @@ export class PersonalInformationPage {
     await this.fillSex(formData.sex);
     await this.fillExperience(formData.experience);
     await this.fillProfession(formData.profession);
+    await this.uploadFile(formData.file);
     await this.fillTools(formData.tools);
     await this.fillContinent(formData.continent);
     await this.fillCommands(formData.commands);
@@ -76,8 +79,9 @@ export class PersonalInformationPage {
     await browser.switchTo().alert().accept();
   }
 
-  public async uploadFile(): Promise<void> {
-    await $('[name="tool"]').click();
+  public async uploadFile(relativePath: string): Promise<void> {
+    const path = resolve(relativePath);
+    await $('[name="photo"]').sendKeys(path);
   }
 
   public async pressConfirmButton(): Promise<void> {
