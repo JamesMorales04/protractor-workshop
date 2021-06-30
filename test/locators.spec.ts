@@ -18,6 +18,7 @@ describe('Given a SDET learning protractor', () => {
           profession: ['Automation Tester'],
           tools: ['Selenium Webdriver'],
           continent: 'South America',
+          file: './resources/universe.jpg',
           commands: [
             'Browser Commands',
             'Navigation Commands',

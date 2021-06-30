@@ -10,6 +10,7 @@ interface PersonalData {
   profession: string[];
   tools: string[];
   continent: string;
+  file: string;
   commands:string[];
 
 }
@@ -73,6 +74,10 @@ export class PersonalInformationPage {
   public async acceptAlert(): Promise<void> {
     await browser.wait(ExpectedConditions.alertIsPresent());
     await browser.switchTo().alert().accept();
+  }
+
+  public async uploadFile(): Promise<void> {
+    await $('[name="tool"]').click();
   }
 
   public async pressConfirmButton(): Promise<void> {
