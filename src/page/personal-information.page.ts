@@ -11,14 +11,19 @@ interface PersonalData {
   tools: string[];
   continent: string;
   commands:string[];
-
 }
 
 export class PersonalInformationPage {
   private confirmButton: ElementFinder;
 
+  private firstName: ElementFinder;
+
+  private lastName: ElementFinder;
+
   constructor() {
     this.confirmButton = $('[name="submit"]');
+    this.firstName = element(by.name('firstname'));
+    this.lastName = element(by.name('lastname'));
   }
 
   public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
@@ -32,8 +37,8 @@ export class PersonalInformationPage {
   }
 
   public async fillFullName(firstName: string, lastName:string): Promise<void> {
-    await element(by.name('firstname')).sendKeys(firstName);
-    await element(by.name('lastname')).sendKeys(lastName);
+    await this.firstName.sendKeys(firstName);
+    await this.lastName.sendKeys(lastName);
   }
 
   public async fillSex(sex: string): Promise<void> {
