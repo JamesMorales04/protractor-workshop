@@ -26,16 +26,6 @@ export class PersonalInformationPage {
     this.lastName = element(by.name('lastname'));
   }
 
-  public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
-    await this.fillFullName(formData.firstName, formData.lastName);
-    await this.fillSex(formData.sex);
-    await this.fillExperience(formData.experience);
-    await this.fillProfession(formData.profession);
-    await this.fillTools(formData.tools);
-    await this.fillContinent(formData.continent);
-    await this.fillCommands(formData.commands);
-  }
-
   private async fillFullName(firstName: string, lastName:string): Promise<void> {
     await this.firstName.sendKeys(firstName);
     await this.lastName.sendKeys(lastName);
@@ -71,13 +61,23 @@ export class PersonalInformationPage {
     });
   }
 
-  public async switchToMainPage(): Promise<void> {
-    await browser.switchTo().defaultContent();
-  }
-
   private async acceptAlert(): Promise<void> {
     await browser.wait(ExpectedConditions.alertIsPresent());
     await browser.switchTo().alert().accept();
+  }
+
+  public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
+    await this.fillFullName(formData.firstName, formData.lastName);
+    await this.fillSex(formData.sex);
+    await this.fillExperience(formData.experience);
+    await this.fillProfession(formData.profession);
+    await this.fillTools(formData.tools);
+    await this.fillContinent(formData.continent);
+    await this.fillCommands(formData.commands);
+  }
+
+  public async switchToMainPage(): Promise<void> {
+    await browser.switchTo().defaultContent();
   }
 
   public async getFormTitle(): Promise<string> {
