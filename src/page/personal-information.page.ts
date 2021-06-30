@@ -20,8 +20,11 @@ interface PersonalData {
 export class PersonalInformationPage {
   private confirmButton: ElementFinder;
 
+  private imageUploadButton: ElementFinder;
+
   constructor() {
     this.confirmButton = $('[name="submit"]');
+    this.imageUploadButton = $('[name="photo"]');
   }
 
   public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
@@ -81,7 +84,12 @@ export class PersonalInformationPage {
 
   public async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
-    await $('[name="photo"]').sendKeys(path);
+    await this.imageUploadButton.sendKeys(path);
+  }
+
+  public async verifyUploadedFile(): Promise<string> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.imageUploadButton), 3000);
+    return (await this.imageUploadButton.getAttribute('value')).split('\\').pop();
   }
 
   public async pressConfirmButton(): Promise<void> {

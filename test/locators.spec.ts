@@ -27,6 +27,9 @@ describe('Given a SDET learning protractor', () => {
             'WebElement Commands'],
         });
       });
+      it('then should have a file uploaded', async () => {
+        expect(await personalInformationPage.verifyUploadedFile()).toEqual('universe.jpg');
+      });
       describe('Accept the alert', () => {
         beforeEach(async () => {
           await personalInformationPage.pressConfirmButton();
