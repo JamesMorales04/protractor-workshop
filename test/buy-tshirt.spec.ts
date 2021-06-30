@@ -11,12 +11,11 @@ describe('Go to a shopping page', () => {
     await browser.get('http://automationpractice.com/');
   });
   describe('Buy a t-shirt process', () => {
-    const menuContentPage: MenuContentPage = new MenuContentPage();
-    const productListPage: ProductListPage = new ProductListPage();
-    const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
-    const summaryStepPage: SummaryStepPage = new SummaryStepPage();
-
     beforeAll(async () => {
+      const menuContentPage: MenuContentPage = new MenuContentPage();
+      const productListPage: ProductListPage = new ProductListPage();
+      const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
+      const summaryStepPage: SummaryStepPage = new SummaryStepPage();
       await menuContentPage.goToTShirtMenu();
       await productListPage.selectProduct('Faded Short Sleeve T-shirts');
       await productListPage.addToCart();
@@ -24,24 +23,26 @@ describe('Go to a shopping page', () => {
       await summaryStepPage.goToSignInMenu();
     });
     describe('Login process', () => {
-      const signInStepPage: SignInStepPage = new SignInStepPage();
       beforeAll(async () => {
-        await signInStepPage.goToAddressMenu('aperdomobo@gmail.com', 'WorkshopProtractor');
+        const signInStepPage: SignInStepPage = new SignInStepPage();
+        await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
       });
       describe('Choosing address and shipping', () => {
-        const addressStepPage: AddressStepPage = new AddressStepPage();
-        const shippingStepPage: ShippingStepPage = new ShippingStepPage();
         beforeAll(async () => {
+          const addressStepPage: AddressStepPage = new AddressStepPage();
+          const shippingStepPage: ShippingStepPage = new ShippingStepPage();
           await addressStepPage.goToShippingStepMenu();
           await shippingStepPage.goToPaymentMenu();
         });
         describe('Bank Payment', () => {
-          const paymentStepPage: PaymentStepPage = new PaymentStepPage();
-          const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
-          const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
-          it('then should be bought a t-shirt', async () => {
+          beforeAll(async () => {
+            const paymentStepPage: PaymentStepPage = new PaymentStepPage();
+            const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
             await paymentStepPage.goToBankPaymentMenu();
             await bankPaymentPage.goToOrderSummaryMenu();
+          });
+          it('then should be bought a t-shirt', async () => {
+            const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
             await expect(orderSummaryPage.goToProcessComplete()).toBe('Your order on My Store is complete.');
           });
         });
