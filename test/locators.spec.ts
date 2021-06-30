@@ -1,4 +1,4 @@
-import { by, browser } from 'protractor';
+import { browser } from 'protractor';
 import { PersonalInformationPage } from '../src/page';
 
 describe('Given a SDET learning protractor', () => {
@@ -29,10 +29,9 @@ describe('Given a SDET learning protractor', () => {
       describe('Accept the alert', () => {
         beforeEach(async () => {
           await personalInformationPage.pressConfirmButton();
-          await personalInformationPage.acceptAlert();
         });
         it('then should have the title Practice Automation Form', async () => {
-          expect(await browser.findElement(by.tagName('h1')).getText()).toEqual('Selenium - Automation Practice Form');
+          expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
         });
       });
     });
