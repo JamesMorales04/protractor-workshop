@@ -13,7 +13,6 @@ export const config: Config = {
     browserName: 'chrome',
     chromeOptions: {
       args: ['--headless', '--disable-gpu'],
-      prefs: { credentials_enable_service: false },
     },
   },
   onPrepare: () => {
