@@ -2,6 +2,8 @@ import {
   $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
+import * as remote from 'selenium-webdriver/remote';
+
 const { resolve } = require('path');
 const { fs } = require('fs');
 
@@ -90,10 +92,12 @@ export class PersonalInformationPage {
     return browser.findElement(by.tagName('h1')).getText();
   }
 
-  private async uploadFile(relativePath: string): Promise<void> {
+  public async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
     if (fs.existsSync(path)) {
+      await browser.setFileDetector(new remote.FileDetector());
       await this.imageUploadButton.sendKeys(path);
+      await browser.setFileDetector(undefined);
     }
   }
 
