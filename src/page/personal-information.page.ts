@@ -4,8 +4,9 @@ import {
 
 import * as remote from 'selenium-webdriver/remote';
 
+import { existsSync } from 'fs';
+
 const { resolve } = require('path');
-const { fs } = require('fs');
 
 interface PersonalData {
   firstName: string;
@@ -94,7 +95,7 @@ export class PersonalInformationPage {
 
   public async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
-    if (fs.existsSync(path)) {
+    if (existsSync(path)) {
       await browser.setFileDetector(new remote.FileDetector());
       await this.imageUploadButton.sendKeys(path);
       await browser.setFileDetector(undefined);
