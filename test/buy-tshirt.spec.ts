@@ -5,12 +5,12 @@ import {
   BankPaymentPage, OrderSummaryPage,
 } from '../src/page';
 
-describe('Go to a shopping page', () => {
+describe('Given a shopping page', () => {
   beforeAll(async () => {
     await browser.waitForAngularEnabled(false);
     await browser.get('http://automationpractice.com/');
   });
-  describe('Buy a t-shirt process', () => {
+  describe('When buy a t-shirt process', () => {
     beforeAll(async () => {
       const menuContentPage: MenuContentPage = new MenuContentPage();
       const productListPage: ProductListPage = new ProductListPage();
@@ -22,26 +22,26 @@ describe('Go to a shopping page', () => {
       await productAddedModalPage.goToSummaryMenu();
       await summaryStepPage.goToSignInMenu();
     });
-    describe('Login process', () => {
+    describe('And login process', () => {
       beforeAll(async () => {
         const signInStepPage: SignInStepPage = new SignInStepPage();
         await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
       });
-      describe('Choosing address and shipping', () => {
+      describe('And choosing address and shipping', () => {
         beforeAll(async () => {
           const addressStepPage: AddressStepPage = new AddressStepPage();
           const shippingStepPage: ShippingStepPage = new ShippingStepPage();
           await addressStepPage.goToShippingStepMenu();
           await shippingStepPage.goToPaymentMenu();
         });
-        describe('Bank Payment', () => {
+        describe('And Bank Payment', () => {
           beforeAll(async () => {
             const paymentStepPage: PaymentStepPage = new PaymentStepPage();
             const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
             await paymentStepPage.goToBankPaymentMenu();
             await bankPaymentPage.goToOrderSummaryMenu();
           });
-          it('then should be bought a t-shirt', async () => {
+          it('Then should be bought a t-shirt', async () => {
             const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
             await expect(orderSummaryPage.goToProcessComplete()).toBe('Your order on My Store is complete.');
           });
