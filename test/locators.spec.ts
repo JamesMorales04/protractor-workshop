@@ -7,7 +7,7 @@ describe('Given a SDET learning protractor', () => {
       await browser.waitForAngularEnabled(false);
       await browser.driver.get('https://www.tutorialspoint.com/selenium/selenium_automation_practice.htm');
     });
-    describe('Then fill the form', () => {
+    describe('and fill the form', () => {
       const personalInformationPage: PersonalInformationPage = new PersonalInformationPage();
       beforeEach(async () => {
         await personalInformationPage.fillPersonalDataForm({
@@ -26,13 +26,12 @@ describe('Given a SDET learning protractor', () => {
             'WebElement Commands'],
         });
       });
-      describe('Accept the alert', () => {
+      describe('and Accept the alert', () => {
         beforeEach(async () => {
           await personalInformationPage.pressConfirmButton();
-          await personalInformationPage.acceptAlert();
         });
         it('then should have the title Practice Automation Form', async () => {
-          expect(await browser.driver.getTitle()).toEqual('Selenium - Automation Practice Form - Tutorialspoint');
+          expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
         });
       });
     });
