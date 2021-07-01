@@ -33,7 +33,6 @@ describe('Given a SDET learning protractor', () => {
       describe('And Accept the alert', () => {
         beforeEach(async () => {
           await personalInformationPage.pressConfirmButton();
-          await personalInformationPage.switchToMainPage();
         });
         it('Then should have the title Practice Automation Form', async () => {
           expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
