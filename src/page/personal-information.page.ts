@@ -2,6 +2,12 @@ import {
   $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
+import * as remote from 'selenium-webdriver/remote';
+
+import { existsSync } from 'fs';
+
+const { resolve } = require('path');
+
 interface PersonalData {
   firstName: string;
   lastName: string;
@@ -10,11 +16,13 @@ interface PersonalData {
   profession: string[];
   tools: string[];
   continent: string;
+  file?: string;
   commands:string[];
 }
-
 export class PersonalInformationPage {
   private confirmButton: ElementFinder;
+
+  private imageUploadButton: ElementFinder;
 
   private firstName: ElementFinder;
 
@@ -22,13 +30,9 @@ export class PersonalInformationPage {
 
   constructor() {
     this.confirmButton = $('[name="submit"]');
+    this.imageUploadButton = $('[name="photo"]');
     this.firstName = element(by.name('firstname'));
     this.lastName = element(by.name('lastname'));
-  }
-
-  private async fillFullName(firstName: string, lastName:string): Promise<void> {
-    await this.firstName.sendKeys(firstName);
-    await this.lastName.sendKeys(lastName);
   }
 
   private async fillSex(sex: string): Promise<void> {
@@ -66,14 +70,28 @@ export class PersonalInformationPage {
     await browser.switchTo().alert().accept();
   }
 
+  private async uploadFile(relativePath: string): Promise<void> {
+    const path = resolve(relativePath);
+    if (existsSync(path)) {
+      await browser.setFileDetector(new remote.FileDetector());
+      await this.imageUploadButton.sendKeys(path);
+      await browser.setFileDetector(undefined);
+    }
+  }
+
   public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
-    await this.fillFullName(formData.firstName, formData.lastName);
+    await this.firstName.sendKeys(formData.firstName);
+    await this.lastName.sendKeys(formData.lastName);
     await this.fillSex(formData.sex);
     await this.fillExperience(formData.experience);
     await this.fillProfession(formData.profession);
     await this.fillTools(formData.tools);
     await this.fillContinent(formData.continent);
     await this.fillCommands(formData.commands);
+
+    if (formData.file) {
+      await this.uploadFile(formData.file);
+    }
   }
 
   public async switchToMainPage(): Promise<void> {
@@ -82,6 +100,11 @@ export class PersonalInformationPage {
 
   public async getFormTitle(): Promise<string> {
     return browser.findElement(by.tagName('h1')).getText();
+  }
+
+  public async verifyUploadedFile(): Promise<string> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.imageUploadButton), 3000);
+    return (await this.imageUploadButton.getAttribute('value')).split('\\').pop();
   }
 
   public async pressConfirmButton(): Promise<void> {

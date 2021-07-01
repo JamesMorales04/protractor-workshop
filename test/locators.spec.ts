@@ -18,6 +18,7 @@ describe('Given a SDET learning protractor', () => {
           profession: ['Automation Tester'],
           tools: ['Selenium Webdriver'],
           continent: 'South America',
+          file: './resources/universe.jpg',
           commands: [
             'Browser Commands',
             'Navigation Commands',
@@ -26,13 +27,10 @@ describe('Given a SDET learning protractor', () => {
             'WebElement Commands'],
         });
       });
-      describe('And Accept the alert', () => {
-        beforeEach(async () => {
-          await personalInformationPage.pressConfirmButton();
-        });
-        it('Then should have the title Practice Automation Form', async () => {
-          expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
-        });
+      it('Then should have a file uploaded And should have the title after the alert is accepted', async () => {
+        expect(await personalInformationPage.verifyUploadedFile()).toEqual('universe.jpg');
+        await personalInformationPage.pressConfirmButton();
+        expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
       });
     });
   });
