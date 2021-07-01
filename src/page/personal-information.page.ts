@@ -13,11 +13,9 @@ interface PersonalData {
   profession: string[];
   tools: string[];
   continent: string;
-  file: string;
+  file?: string;
   commands:string[];
-
 }
-
 export class PersonalInformationPage {
   private confirmButton: ElementFinder;
 
@@ -33,10 +31,13 @@ export class PersonalInformationPage {
     await this.fillSex(formData.sex);
     await this.fillExperience(formData.experience);
     await this.fillProfession(formData.profession);
-    await this.uploadFile(formData.file);
     await this.fillTools(formData.tools);
     await this.fillContinent(formData.continent);
     await this.fillCommands(formData.commands);
+
+    if (formData.file) {
+      await this.uploadFile(formData.file);
+    }
   }
 
   public async fillFullName(firstName: string, lastName:string): Promise<void> {
