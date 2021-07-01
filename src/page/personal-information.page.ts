@@ -2,6 +2,8 @@ import {
   $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
+import * as remote from 'selenium-webdriver/remote';
+
 const { resolve } = require('path');
 
 interface PersonalData {
