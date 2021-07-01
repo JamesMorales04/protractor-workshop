@@ -35,21 +35,6 @@ export class PersonalInformationPage {
     this.lastName = element(by.name('lastname'));
   }
 
-  public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
-    await this.firstName.sendKeys(formData.firstName);
-    await this.lastName.sendKeys(formData.lastName);
-    await this.fillSex(formData.sex);
-    await this.fillExperience(formData.experience);
-    await this.fillProfession(formData.profession);
-    await this.fillTools(formData.tools);
-    await this.fillContinent(formData.continent);
-    await this.fillCommands(formData.commands);
-
-    if (formData.file) {
-      await this.uploadFile(formData.file);
-    }
-  }
-
   private async fillSex(sex: string): Promise<void> {
     await $(`[name="sex"][value="${sex}"]`).click();
   }
@@ -91,6 +76,21 @@ export class PersonalInformationPage {
       await browser.setFileDetector(new remote.FileDetector());
       await this.imageUploadButton.sendKeys(path);
       await browser.setFileDetector(undefined);
+    }
+  }
+
+  public async fillPersonalDataForm(formData: PersonalData): Promise<void> {
+    await this.firstName.sendKeys(formData.firstName);
+    await this.lastName.sendKeys(formData.lastName);
+    await this.fillSex(formData.sex);
+    await this.fillExperience(formData.experience);
+    await this.fillProfession(formData.profession);
+    await this.fillTools(formData.tools);
+    await this.fillContinent(formData.continent);
+    await this.fillCommands(formData.commands);
+
+    if (formData.file) {
+      await this.uploadFile(formData.file);
     }
   }
 
