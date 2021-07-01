@@ -24,11 +24,11 @@ export class ProductListPage {
   public async selectProduct(productName: string): Promise<void> {
     const selectedProduct = this.findByProduct(productName);
     await browser.wait(ExpectedConditions.elementToBeClickable(selectedProduct.$('img')), 3000);
-    selectedProduct.$('img').click();
+    await selectedProduct.$('img').click();
   }
 
   public async addToCart(): Promise<void> {
     await browser.wait(ExpectedConditions.elementToBeClickable(this.addToCartButton), 3000);
-    this.addToCartButton.click();
+    await this.addToCartButton.click();
   }
 }

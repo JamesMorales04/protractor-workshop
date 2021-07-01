@@ -4,7 +4,7 @@ export class AddressStepPage {
   private shippingStepMenu: ElementFinder;
 
   constructor() {
-    this.shippingStepMenu = $('#center_column > form > p > [name="processAddress"]');
+    this.shippingStepMenu = $('[name="processAddress"]');
   }
 
   public async goToShippingStepMenu(): Promise<void> {
