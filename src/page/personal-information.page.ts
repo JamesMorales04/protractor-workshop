@@ -3,6 +3,7 @@ import {
 } from 'protractor';
 
 const { resolve } = require('path');
+const { fs } = require('fs');
 
 interface PersonalData {
   firstName: string;
@@ -84,7 +85,9 @@ export class PersonalInformationPage {
 
   public async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
-    await this.imageUploadButton.sendKeys(path);
+    if (fs.existsSync(path)) {
+      await this.imageUploadButton.sendKeys(path);
+    }
   }
 
   public async verifyUploadedFile(): Promise<string> {
