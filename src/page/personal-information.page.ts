@@ -85,21 +85,21 @@ export class PersonalInformationPage {
     await browser.switchTo().alert().accept();
   }
 
-  public async switchToMainPage(): Promise<void> {
-    await browser.switchTo().defaultContent();
-  }
-
-  public async getFormTitle(): Promise<string> {
-    return browser.findElement(by.tagName('h1')).getText();
-  }
-
-  public async uploadFile(relativePath: string): Promise<void> {
+  private async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
     if (existsSync(path)) {
       await browser.setFileDetector(new remote.FileDetector());
       await this.imageUploadButton.sendKeys(path);
       await browser.setFileDetector(undefined);
     }
+  }
+
+  public async switchToMainPage(): Promise<void> {
+    await browser.switchTo().defaultContent();
+  }
+
+  public async getFormTitle(): Promise<string> {
+    return browser.findElement(by.tagName('h1')).getText();
   }
 
   public async verifyUploadedFile(): Promise<string> {
