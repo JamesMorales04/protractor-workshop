@@ -40,5 +40,8 @@
     "jasmine-spec-reporter": "^7.0.0",
     "protractor": "^7.0.0",
     "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^3.6.0"
   }
 }

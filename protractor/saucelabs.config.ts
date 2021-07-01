@@ -3,7 +3,7 @@ import { reporter } from './helpers/reporter';
 
 export const config: Config = {
   framework: 'jasmine',
-  specs: ['../test/**/*.spec.js'],
+  specs: ['../test/**/locators.spec.js'],
   getPageTimeout: 30000,
   SELENIUM_PROMISE_MANAGER: false,
   sauceUser: process.env.SAUCE_USERNAME,

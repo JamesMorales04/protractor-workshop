@@ -2,6 +2,8 @@ import {
   $, element, by, ElementFinder, browser, ExpectedConditions,
 } from 'protractor';
 
+import * as remote from 'selenium-webdriver/remote';
+
 const { resolve } = require('path');
 
 interface PersonalData {
@@ -84,7 +86,9 @@ export class PersonalInformationPage {
 
   public async uploadFile(relativePath: string): Promise<void> {
     const path = resolve(relativePath);
+    await browser.setFileDetector(new remote.FileDetector());
     await this.imageUploadButton.sendKeys(path);
+    await browser.setFileDetector(undefined);
   }
 
   public async verifyUploadedFile(): Promise<string> {
