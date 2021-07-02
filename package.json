@@ -8,9 +8,10 @@
     "build": "npm run lint && npm run clean && tsc",
     "webdriver:update": "webdriver-manager update --gecko false",
     "lint": "eslint protractor/**/*.ts test/**/*.ts src/**/*.ts",
-    "test": "npm run test:headless",
+    "test": "npm run test:saucelabs",
     "test:headless": "npm run build && protractor dist/protractor/headless.config.js",
-    "test:local": "npm run build && protractor dist/protractor/local.config.js"
+    "test:local": "npm run build && protractor dist/protractor/local.config.js",
+    "test:saucelabs": "npm run build && protractor dist/protractor/saucelabs.config.js"
   },
   "repository": {
     "type": "git",
@@ -42,5 +43,8 @@
     "request": "^2.88.2",
     "selenium-webdriver": "^3.6.0",
     "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^3.6.0"
   }
 }

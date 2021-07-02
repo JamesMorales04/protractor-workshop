@@ -104,7 +104,7 @@ export class PersonalInformationPage {
 
   public async verifyUploadedFile(): Promise<string> {
     await browser.wait(ExpectedConditions.elementToBeClickable(this.imageUploadButton), 3000);
-    return (await this.imageUploadButton.getAttribute('value')).split('\\').pop();
+    return (await this.imageUploadButton.getAttribute('value')).split('\\').pop().trim();
   }
 
   public async pressConfirmButton(): Promise<void> {
