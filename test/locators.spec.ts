@@ -2,12 +2,12 @@ import { browser } from 'protractor';
 import { PersonalInformationPage } from '../src/page';
 
 describe('Given a SDET learning protractor', () => {
-  describe('when open Automation Practice Form', () => {
+  describe('When open Automation Practice Form', () => {
     beforeEach(async () => {
       await browser.waitForAngularEnabled(false);
       await browser.driver.get('https://www.tutorialspoint.com/selenium/selenium_automation_practice.htm');
     });
-    describe('Then fill the form', () => {
+    describe('And fill the form', () => {
       const personalInformationPage: PersonalInformationPage = new PersonalInformationPage();
       beforeEach(async () => {
         await personalInformationPage.fillPersonalDataForm({
@@ -27,18 +27,10 @@ describe('Given a SDET learning protractor', () => {
             'WebElement Commands'],
         });
       });
-      it('then should have a file uploaded', async () => {
+      it('Then should have a file uploaded And should have the title after the alert is accepted', async () => {
         expect(await personalInformationPage.verifyUploadedFile()).toEqual('universe.jpg');
-      });
-      describe('Accept the alert', () => {
-        beforeEach(async () => {
-          await personalInformationPage.pressConfirmButton();
-          await personalInformationPage.acceptAlert();
-          await personalInformationPage.switchToMainPage();
-        });
-        it('then should have the title Practice Automation Form', async () => {
-          expect(await browser.driver.getTitle()).toEqual('Selenium - Automation Practice Form - Tutorialspoint');
-        });
+        await personalInformationPage.pressConfirmButton();
+        expect(personalInformationPage.getFormTitle()).toEqual('Selenium - Automation Practice Form');
       });
     });
   });
