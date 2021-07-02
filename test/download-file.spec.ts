@@ -5,7 +5,7 @@ import { DownloadFile } from '../src/page';
 import { DownloadService } from '../src/service/download.service';
 
 describe('Given a SDET learning protractor', () => {
-  describe('When open Google Page', () => {
+  describe('When open web page with a file to download', () => {
     beforeEach(async () => {
       await browser.waitForAngularEnabled(false);
       await browser.driver.get('http://the-internet.herokuapp.com/download');
@@ -15,7 +15,7 @@ describe('Given a SDET learning protractor', () => {
       beforeEach(async () => {
         await downloadFile.download();
       });
-      it('Then should have a title', async () => {
+      it('Then should be in temp folde', async () => {
         const service = new DownloadService();
         const file = await service.readFileFromTemp('testFile.jpeg');
         expect(file.byteLength).toBeGreaterThanOrEqual(8000);
