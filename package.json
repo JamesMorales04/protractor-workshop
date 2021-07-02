@@ -40,5 +40,9 @@
     "protractor": "^7.0.0",
     "selenium-webdriver": "^3.6.0",
     "typescript": "^4.3.4"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "request": "^2.88.2"
   }
 }
